@@ -1,0 +1,41 @@
+defaults:
+  - _self_
+  - dataset: humanml3d
+  - diffuser: dit_ddpm
+  - compnode: 1g_1n
+
+timestamp: ${now:%Y-%m-%d-%H-%M-%S}
+
+outdir: null
+entity: null
+project_name: lab-MotionDiT
+results_dir: ./results
+data_dir: ./humanml3d-data
+metric_dir: ./metrics
+
+log_dir: ${results_dir}/${xp_name}/${timestamp}
+xp_name: ${diffuser.loss.name}-${diffuser.network.module.name}-${dataset.name}
+checkpoint_path: ./humanml3d-data/checkpoints/incontext.ckpt
+
+seed: 42
+save_last_only: true
+save_and_sample_every: 10
+num_train_epochs: 501
+log_wandb: true
+batch_size: 64
+
+trainer:
+  _target_: lightning.Trainer
+  _partial_: true
+  accelerator: ${compnode.device}
+  strategy: auto
+  devices: ${compnode.num_gpus}
+  max_epochs: ${num_train_epochs}
+  check_val_every_n_epoch: ${save_and_sample_every}
+  num_sanity_val_steps: 0
+  limit_predict_batches: 1
+  limit_test_batches: 10
+
+hydra:
+  run:
+    dir: ./${results_dir}/${xp_name}/${timestamp}

@@ -1,0 +1,10 @@
+_target_: src.training.samplers.ddim.DDIMSampler
+
+name: ddim
+
+num_steps: 50
+cfg_rate: ${diffuser.guidance_weight}
+
+scheduler:
+  _target_: src.training.noise_schedulers.cosine.CosineScheduler
+  clip_min: 1e-5

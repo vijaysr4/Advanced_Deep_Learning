@@ -1,0 +1,29 @@
+_target_: src.metrics.modules.tmr.TMR
+
+checkpoint_dir: ${dataset.dataset_dir}/checkpoints
+device: ${compnode.device}
+
+vae: true
+sample_mean: true
+
+motion_encoder:
+  _target_: src.metrics.modules.tmr.ACTORStyleEncoder
+  nfeats: 205
+  vae: true
+  latent_dim: 256
+  ff_size: 1024
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  activation: gelu
+
+text_encoder:
+  _target_: src.metrics.modules.tmr.ACTORStyleEncoder
+  nfeats: 512
+  vae: true
+  latent_dim: 256
+  ff_size: 1024
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  activation: gelu

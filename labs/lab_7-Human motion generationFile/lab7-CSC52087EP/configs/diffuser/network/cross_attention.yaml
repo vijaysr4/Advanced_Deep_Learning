@@ -1,0 +1,23 @@
+_target_: src.models.ddpm.DDPMPrecond
+
+module:
+  _target_: src.models.modules.cross_attention.CrossAttentionDiT
+
+  name: cross_attention
+
+  num_frames: ${dataset.num_frames}
+  num_feats: ${dataset.num_feats}
+  num_cond_feats: ${dataset.num_cond_feats}
+  clip_sequential: True
+  cond_sequential: True
+
+  latent_dim: 512
+  mlp_multiplier: 4
+  num_layers: 8
+  num_heads: 16
+  dropout: 0.1
+  stochastic_depth: 0.1
+  label_dropout: 0.1
+
+  device: ${compnode.device}
+

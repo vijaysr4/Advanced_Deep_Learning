@@ -1,0 +1,9 @@
+_target_: src.training.losses.ddpm.DDPMLoss
+
+name: ddpm
+
+num_steps: 100
+
+scheduler:
+  _target_: src.training.noise_schedulers.cosine.CosineScheduler
+  clip_min: 1e-9

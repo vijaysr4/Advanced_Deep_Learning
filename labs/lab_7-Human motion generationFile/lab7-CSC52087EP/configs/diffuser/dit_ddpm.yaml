@@ -1,0 +1,40 @@
+_target_: src.training.diffuser.Diffuser
+
+defaults:
+  - network: incontext
+  - loss: ddpm
+  - sampler@train_sampler: ddim
+  - sampler@test_sampler: ddpm
+  - metrics@tmr: tmr-rifke
+  - _self_
+
+# CFG rate
+guidance_weight: 3.5
+
+# Main options
+log_wandb: ${log_wandb}
+sync_dist: true
+
+# EMA
+ema_kwargs:
+  beta: 0.9999
+  update_every: 1
+# LR Scheduler
+lr_scheduler:
+  _target_: src.training.lr_schedulers.warmup_cosine.WarmupCosineDecayLR
+  _partial_: true
+  warmup_steps: 5000
+  rate: 1.0
+# Optimizer
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1e-4
+  betas: [0.9, 0.95]
+  eps: 1e-7
+  weight_decay: 0.1
+# Metric callback
+metric_callback:
+  _target_: src.callbacks.metrics.MetricCallback
+  _partial_: true
+  num_frames: ${dataset.num_frames}

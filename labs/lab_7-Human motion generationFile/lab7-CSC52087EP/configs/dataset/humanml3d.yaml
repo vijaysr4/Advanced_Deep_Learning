@@ -1,0 +1,52 @@
+_target_: src.datasets.multimodal_dataset.MultimodalDataset
+
+# ------------------------------------------------------------------------------------- #
+
+standardization:
+  name: '0197'
+  num_frames: 197
+  velocity: true
+  smplrifke:
+    feat_rifke:
+      mean_path: configs/dataset/standardization/tmr-rifke-mean.pt
+      std_path: configs/dataset/standardization/tmr-rifke-std.pt
+    tmr_rifke:
+      mean_path: configs/dataset/standardization/tmr-rifke-mean.pt
+      std_path: configs/dataset/standardization/tmr-rifke-std.pt
+
+# ------------------------------------------------------------------------------------- #
+
+caption:
+  _target_: src.datasets.modalities.caption_dataset.CaptionDataset
+  name: caption
+  dataset_dir: ${dataset.dataset_dir}
+  num_frames: ${dataset.standardization.num_frames}
+  num_feats: 512
+  sequential: ${diffuser.network.module.clip_sequential}
+
+# ------------------------------------------------------------------------------------- #
+
+human:
+  _target_: src.datasets.modalities.human_dataset.HumanDataset
+  name: human
+  dataset_dir: ${dataset.dataset_dir}
+  num_frames: ${dataset.num_frames}
+  num_feats: 205
+  sequential: false
+  standardization: ${dataset.standardization.smplrifke}
+  smpl_kwargs:
+      model_path: ${dataset.dataset_dir}
+      model_type: "smplh"
+      use_compressed: false
+      use_face_contour: true
+      num_betas: 10
+
+
+# ------------------------------------------------------------------------------------- #
+
+name: humanml3d
+dataset_dir: ${data_dir}
+dataset_name: ${dataset.standardization.name}
+num_frames: ${dataset.standardization.num_frames}
+num_feats: ${eval:'${dataset.human.num_feats}'}
+num_cond_feats: '${dataset.caption.num_feats}'
