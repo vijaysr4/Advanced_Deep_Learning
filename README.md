@@ -30,11 +30,11 @@ Welcome to the repository for the Advanced Deep Learning Course (CSC_52087_EP). 
 
 The following lecture documents are available in the repository (updated 1 minute ago):
 
-- **Lecture1:** [Generative Adversarial Networks (GANs) & GAN editing](lectures/Lecture1-Generative_Adversarial_Networks_(GANs)_and_GAN_editing.pdf)
+- **Lecture1:** [Generative Adversarial Networks (GANs) & GAN](lectures/Lecture1-Generative_Adversarial_Networks_(GANs)_and_GAN.pdf)
 - **Lecture2:** [Introduction to Graph Machine Learning](lectures/Lecture2-Introduction_to_Graph_Machine_Learning.pdf)
 - **Lecture3:** [GNNs](lectures/Lecture3_GNNs.pdf)
 - **Lecture4:** [From GANs to Stable Diffusion](lectures/Lecture4-From_GANs_to_Stable_Diffusion.pdf)
-- **Lecture5:** [Representation Learning for NLP and Attention based Architectures - Transformer](lectures/Lecture5-Representation_Learning_for_NLP_and_Attention_based_Architectures-Transformer.pdf)
+- **Lecture5:** [Representation Learning for NLP and Attention_based Architectures-Transformer](lectures/Lecture5-Representation_Learning_for_NLP_and_Attention_based_Architectures-Transformer.pdf)
 - **Lecture6:** [Graph Generative AI and Applications](lectures/Lecture6-Graph_generative_AI_and_applications.pdf)
 - **Lecture7:** [Control Generation](lectures/Lecture7-Control_Generation.pdf)
 - **Lecture8:** [Symmetry in Deep Learning Representations](lectures/Lecture8_Symmetry_in_Deep_Learning_Representations.pdf)
